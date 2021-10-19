@@ -23,7 +23,8 @@ function addTime(hour, minute, interval) {
     hour += Math.floor((minute + interval) / 60); // 35 + 30 = 65 / 60 = 1 ( / - остаток 1)
     minute = (minute + interval) % 60; // 35 + 30 = 65, 65 % 60 - остаток 5 ( %)
 
-    hour = hour % 24; // 
+    hour = hour % 24; // переход в другой день в случае hour > 23
+   
 
     if (minute >= 0 && minute <= 9) {
         minute = "0" + minute;
@@ -34,4 +35,4 @@ function addTime(hour, minute, interval) {
 
     return hour + ":" + minute;
 }
-console.log("Время: " + addTime(12, 30, 35));
+console.log("Время: " + addTime(23, 30, 90));
