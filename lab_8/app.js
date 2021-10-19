@@ -19,7 +19,9 @@ console.log("Валидность времени 12:60 : " + isValidTime(12, 60)
 console.log("# Task 3");
 
 function addTime(hour, minute, interval) {
+    
     if(hour < 0 || minute < 0) return "Ошибка валидности времени";
+
     hour += Math.floor((minute + interval) / 60); // 35 + 30 = 65 / 60 = 1 ( / - остаток 1)
     minute = (minute + interval) % 60; // 35 + 30 = 65, 65 % 60 - остаток 5 ( %)
 
