@@ -68,5 +68,5 @@ startTask("ADD Name1 555-888-555-888");
 startTask("ADD Name1 555-888-555-82");
 startTask("ADD Name2 555-888-555-888");
 console.log(startTask("SHOW"));
-startTask("REMOVE_PHONE 555-888-555-888");
+console.log("Удаление номера из базы - " + (startTask("REMOVE_PHONE 555-888-555-888") ? "успешно": "не успешно"));
 console.log(startTask("SHOW"));
