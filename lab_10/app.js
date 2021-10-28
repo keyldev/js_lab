@@ -1,6 +1,8 @@
 try {
     var time = date("2017-09-03 12:55")
-        .add(5, "days");
+        .add(5, "days")
+        .add(10, "hours")
+        .substract(-1, "month");
     console.log(time.value);
 } catch (e) {
     console.log(e.message);
@@ -9,23 +11,23 @@ try {
 function isValidValue(value) {
     if (value < 0 || isNaN(value)) throw new TypeError("Number shouldn't be negative");
 }
-
 function date(timestamp) {
-    var _date = timestamp.slice(0, timestamp.indexOf(" ")).split("-").map(e => parseInt(e, 10)); // режет на год-месяц-день (массив)
-    var _time = timestamp.slice(timestamp.indexOf(" ") + 1).split(":");
-
-    var _date = new Date(_date[0], _date[1] - 1, _date[2], _time[0], _time[1]);
+    var _date = new Date(timestamp); // можно и так передавать
     return {
         add: function (count, command) {
             count = parseInt(count);
             isValidValue(count);
+            console.log("-------ADD");
+            console.log("time before: " + _date);
             _date = getNewDate(count, command, _date);
-
+            console.log("time after: " + _date);
             return this;
         },
         substract: function (count, command) {
             count = parseInt(count);
             isValidValue(count);
+            console.log("-------SUBSTR");
+            console.log("time before:" + _date);
             _date = getNewDate(-1 * count, command, _date);
             return this;
         },
@@ -35,8 +37,7 @@ function date(timestamp) {
             var days = _date.getDate() < 10 ? "0" + _date.getDate() : _date.getDate();
             var hours = _date.getHours() < 10 ? "0" + _date.getHours() : _date.getHours();
             var minutes = _date.getMinutes() < 10 ? "0" + _date.getMinutes() : _date.getMinutes();
-
-            return `${year}-${month}-${days} ${hours}:${minutes}`;
+            return `-------\nResult: ${year}-${month}-${days} ${hours}:${minutes}`;
         }
     }
 }
@@ -66,5 +67,4 @@ function getNewDate(count, command, _date) {
             throw new TypeError("Unknown command");
         }
     }
-
 }
